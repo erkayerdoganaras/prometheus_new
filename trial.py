@@ -68,3 +68,39 @@ async def kubernetes_namespace_cpu_usage():
     response = requests.get('http://168.119.224.222:31338/api/v1/query',
                             params={'query': prome_sql})
     return response.json()["data"]['result']
+
+
+@app.get("/kubernetes-memory-total")
+async def kubernetes_namespace_cpu_usage():
+    prome_sql = 'sum(container_memory_usage_bytes)'
+    response = requests.get('http://168.119.224.222:31338/api/v1/query',
+                            params={'query': prome_sql})
+    return response.json()["data"]['result']
+
+@app.get("/kubernetes-memory-total/node")
+async def kubernetes_namespace_cpu_usage():
+    prome_sql = 'sum(container_memory_usage_bytes{node=""})'
+    response = requests.get('http://168.119.224.222:31338/api/v1/query',
+                            params={'query': prome_sql})
+    return response.json()["data"]['result']
+
+@app.get("/kubernetes-memory-total/container")
+async def kubernetes_namespace_cpu_usage():
+    prome_sql = 'sum(container_cpu_usage_seconds_total{container=""})'
+    response = requests.get('http://168.119.224.222:31338/api/v1/query',
+                            params={'query': prome_sql})
+    return response.json()["data"]['result']
+
+@app.get("/kubernetes-memory-total/pod")
+async def kubernetes_namespace_cpu_usage():
+    prome_sql = 'sum(container_cpu_usage_seconds_total{pod=""})'
+    response = requests.get('http://168.119.224.222:31338/api/v1/query',
+                            params={'query': prome_sql})
+    return response.json()["data"]['result']
+
+@app.get("/kubernetes-memory-total/namespace")
+async def kubernetes_namespace_cpu_usage():
+    prome_sql = 'sum(container_cpu_usage_seconds_total{namespace=""})'
+    response = requests.get('http://168.119.224.222:31338/api/v1/query',
+                            params={'query': prome_sql})
+    return response.json()
