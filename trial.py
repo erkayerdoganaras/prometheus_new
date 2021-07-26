@@ -26,6 +26,8 @@ async def kubernetes_total_memory_usage():
                             params={'query': prome_sql})
     return response.json()["data"]['result']
 
+
+
 #ANLIK DEGER
 @app.get("/kubernetes-cpu-total")
 async def kubernetes_total_cpu_usage():
@@ -37,7 +39,7 @@ async def kubernetes_total_cpu_usage():
 #ANLIK DEGER
 @app.get("/kubernetes-cpu-total/container")
 async def kubernetes_container_cpu_usage():
-    prome_sql = 'sum(container_cpu_usage_seconds_total{container=""})'
+    prome_sql = 'sum(container_cpu_usage_seconds_total{container!=""})'
     response = requests.get('http://168.119.224.222:31338/api/v1/query',
                             params={'query': prome_sql})
     return response.json()["data"]['result']
@@ -45,7 +47,7 @@ async def kubernetes_container_cpu_usage():
 #ANLIK DEGER
 @app.get("/kubernetes-cpu-total/pod")
 async def kubernetes_pod_cpu_usage():
-    prome_sql = 'sum(container_cpu_usage_seconds_total{pod=""})'
+    prome_sql = 'sum(container_cpu_usage_seconds_total{pod!=""})'
     response = requests.get('http://168.119.224.222:31338/api/v1/query',
                             params={'query': prome_sql})
     return response.json()["data"]['result']
@@ -53,7 +55,7 @@ async def kubernetes_pod_cpu_usage():
 #ANLIK DEGER
 @app.get("/kubernetes-cpu-total/namespace")
 async def kubernetes_namespace_cpu_usage():
-    prome_sql = 'sum(container_cpu_usage_seconds_total{namespace=""})'
+    prome_sql = 'sum(container_cpu_usage_seconds_total{namespace!=""})'
     response = requests.get('http://168.119.224.222:31338/api/v1/query',
                             params={'query': prome_sql})
     return response.json()["data"]['result']
@@ -77,7 +79,7 @@ async def kubernetes_total_node_memory_usage():
 #ANLIK DEGER
 @app.get("/kubernetes-memory-total/container")
 async def kubernetes_total_containers_memory_usage():
-    prome_sql = 'sum(container_memory_usage_bytes{container=""})'
+    prome_sql = 'sum(container_memory_usage_bytes{container!=""})'
     response = requests.get('http://168.119.224.222:31338/api/v1/query',
                             params={'query': prome_sql})
     return response.json()["data"]['result']
